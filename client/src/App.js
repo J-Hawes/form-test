@@ -3,6 +3,7 @@ import "./App.css";
 import Element from "./components/Element";
 import testForm from "./testForm.json";
 import { FormContext } from "./FormContext";
+import { useNavigate } from "react-router-dom";
 
 const formReducer = (state, event) => {
   if (event.reset) {
@@ -25,6 +26,8 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
   const [elements, setElement] = useState(null);
   const [data, setData] = useState(null);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     fetch("/movers")
@@ -50,6 +53,7 @@ function App() {
       setFormData({
         reset: true,
       });
+      navigate("/thanks");
     }, 3000);
   };
 
@@ -57,7 +61,7 @@ function App() {
     const newElements = { ...elements };
     const isCheckbox = event.target.type === "checkbox";
     newElements.fields.forEach((field) => {
-      const { field_type, field_id, field_value } = field;
+      const { field_type, field_id } = field;
       if (id === field_id) {
         switch (field_type) {
           case "checkbox":
@@ -77,7 +81,7 @@ function App() {
   };
 
   return (
-    <FormContext.Provider value={{ handleChange }}>
+    <FormContext.Provider value={{ handleChange, handleSubmit }}>
       <div className="wrapper">
         <h1> {page_label}</h1>
         {submitting && (
