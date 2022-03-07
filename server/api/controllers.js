@@ -25,7 +25,7 @@ const getPropertyReport = async (req, res) => {
   });
 };
 
-const getMovers = async () => {
+const getMovers = async (req, res) => {
   fs.readFile(MOVERS, "utf8", (err, jsonString) => {
     if (err) {
       console.log("Error reading file from disk:", err);

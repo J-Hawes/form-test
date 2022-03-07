@@ -1,11 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-// CLIENT
+// client
 # dependencies
-**/node_modules
 /client/node_modules
 /client/.pnp
 /client/.pnp.js
+
+**/node_modules
 
 # testing
 /client/coverage
@@ -24,5 +25,5 @@
 /client/yarn-debug.log*
 /client/yarn-error.log*
 
-// SERVER
-/node_modules
+// server
+/server/node_modules

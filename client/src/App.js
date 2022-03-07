@@ -9,7 +9,7 @@ const formReducer = (state, event) => {
     return {
       name: "",
       email: "",
-      "phone type": "",
+      "phone-type": "",
       number: "",
       subscribe: false,
     };
@@ -27,12 +27,12 @@ function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("/property-report")
+    fetch("/movers")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
 
-  console.log(data);
+  data && console.log(data.data);
 
   useEffect(() => {
     setElement(testForm[0]);
