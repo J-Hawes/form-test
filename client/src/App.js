@@ -24,6 +24,15 @@ function App() {
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
   const [elements, setElement] = useState(null);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("/property-report")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  console.log(data);
 
   useEffect(() => {
     setElement(testForm[0]);
