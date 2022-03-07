@@ -75,11 +75,13 @@ function App() {
           <div>
             You are submitting the following:
             <ul>
-              {Object.entries(formData).map(([name, value]) => (
-                <li key={name}>
-                  <strong>{name}</strong> : {value.toString()}
-                </li>
-              ))}
+              {Object.entries(formData).map(([name, value]) => {
+                return (
+                  <li key={name}>
+                    <strong>{name}</strong>: {value.toString()}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         )}
