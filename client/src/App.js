@@ -1,5 +1,9 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import "./App.css";
+import Element from "./components/Element";
+import testForm from "./testForm.json";
+
+console.log("testForm", testForm);
 
 const formReducer = (state, event) => {
   if (event.reset) {
@@ -20,6 +24,13 @@ const formReducer = (state, event) => {
 function App() {
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
+  const [elements, setElement] = useState(null);
+
+  useEffect(() => {
+    setElement(testForm[0]);
+  }, []);
+
+  const { fields, page_label } = elements ?? {};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,7 +54,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      <h1> Form Test</h1>
+      <h1> {page_label}</h1>
       {submitting && (
         <div>
           You are submitting the following:
@@ -58,55 +69,11 @@ function App() {
       )}
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <label>
-            <p>Name</p>
-            <input
-              name="name"
-              placeholder="name"
-              onChange={handleChange}
-              value={formData.name || ""}
-            />
-          </label>
-          <label>
-            <p>Email Address</p>
-            <input
-              name="email"
-              placeholder="example@address.com"
-              onChange={handleChange}
-              value={formData.email || ""}
-            />
-          </label>
-          <label>
-            <p>Phone type</p>
-            <select
-              name="phonetype"
-              onChange={handleChange}
-              value={formData.phonetype || ""}
-            >
-              <option value="">--Please choose an option--</option>
-              <option value="home">home</option>
-              <option value="work">work</option>
-              <option value="mobile">mobile</option>
-            </select>
-          </label>
-          <label>
-            <p>Number</p>
-            <input
-              name="number"
-              placeholder="04xxxxxxxx"
-              onChange={handleChange}
-              value={formData.number || ""}
-            />
-          </label>
-          <label>
-            <p>Subscribe</p>
-            <input
-              type="checkbox"
-              name="subscribe"
-              onChange={handleChange}
-              checked={formData.subscribe || false}
-            />
-          </label>
+          {fields
+            ? fields.map((field, i) => (
+                <Element key={i} field={field} onChange={handleChange} />
+              ))
+            : null}
         </fieldset>
         <button type="submit">Submit</button>
       </form>
