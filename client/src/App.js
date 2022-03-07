@@ -2,15 +2,14 @@ import React, { useState, useReducer, useEffect } from "react";
 import "./App.css";
 import Element from "./components/Element";
 import testForm from "./testForm.json";
-
-console.log("testForm", testForm);
+import { FormContext } from "./FormContext";
 
 const formReducer = (state, event) => {
   if (event.reset) {
     return {
       name: "",
       email: "",
-      phonetype: "",
+      "phone type": "",
       number: "",
       subscribe: false,
     };
@@ -35,6 +34,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitting(true);
+    console.log(formData);
 
     setTimeout(() => {
       //window.location.href = "thanks.html";
@@ -45,39 +45,54 @@ function App() {
   };
 
   const handleChange = (id, event) => {
+    const newElements = { ...elements };
     const isCheckbox = event.target.type === "checkbox";
-    setFormData({
-      name: event.target.name,
-      value: isCheckbox ? event.target.checked : event.target.value,
+    newElements.fields.forEach((field) => {
+      const { field_type, field_id, field_value } = field;
+      if (id === field_id) {
+        switch (field_type) {
+          case "checkbox":
+            field["field_value"] = event.target.checked;
+            break;
+          default:
+            field["field_value"] = event.target.value;
+            break;
+        }
+      }
+      setElement(newElements);
+      setFormData({
+        name: event.target.name,
+        value: isCheckbox ? event.target.checked : event.target.value,
+      });
     });
   };
 
   return (
-    <div className="wrapper">
-      <h1> {page_label}</h1>
-      {submitting && (
-        <div>
-          You are submitting the following:
-          <ul>
-            {Object.entries(formData).map(([name, value]) => (
-              <li key={name}>
-                <strong>{name}</strong> : {value.toString()}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          {fields
-            ? fields.map((field, i) => (
-                <Element key={i} field={field} onChange={handleChange} />
-              ))
-            : null}
-        </fieldset>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <FormContext.Provider value={{ handleChange }}>
+      <div className="wrapper">
+        <h1> {page_label}</h1>
+        {submitting && (
+          <div>
+            You are submitting the following:
+            <ul>
+              {Object.entries(formData).map(([name, value]) => (
+                <li key={name}>
+                  <strong>{name}</strong> : {value.toString()}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            {fields
+              ? fields.map((field, i) => <Element key={i} field={field} />)
+              : null}
+          </fieldset>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </FormContext.Provider>
   );
 }
 

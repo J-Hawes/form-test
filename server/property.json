@@ -20,7 +20,7 @@
       },
       {
         "field_id": "phone-type",
-        "field_label": "Phone type",
+        "field_label": "Phone Type",
         "field_value": "",
         "field_mandatory": "yes",
         "field_options": [
@@ -38,7 +38,7 @@
       },
       {
         "field_id": "number",
-        "field_label": "Phone Numberr",
+        "field_label": "Phone Number",
         "field_value": "",
         "field_mandatory": "yes",
         "field_placeholder": "04xxxxxxxx",

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FormContext } from "../FormContext";
 
 const Checkbox = ({ field_id, field_label, field_value }) => {
+  const { handleChange } = useContext(FormContext);
   return (
     <div>
       <label>
@@ -10,6 +12,7 @@ const Checkbox = ({ field_id, field_label, field_value }) => {
         type="checkbox"
         name={field_id}
         checked={field_value ? field_value : false}
+        onChange={(event) => handleChange(field_id, event)}
       />
     </div>
   );
