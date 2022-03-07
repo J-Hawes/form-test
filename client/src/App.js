@@ -44,7 +44,7 @@ function App() {
     }, 3000);
   };
 
-  const handleChange = (event) => {
+  const handleChange = (id, event) => {
     const isCheckbox = event.target.type === "checkbox";
     setFormData({
       name: event.target.name,

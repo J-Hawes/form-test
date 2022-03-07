@@ -21,7 +21,7 @@
       {
         "field_id": "phone-type",
         "field_label": "Phone type",
-        "field_value": "--Please choose an option--",
+        "field_value": "",
         "field_mandatory": "yes",
         "field_options": [
           {
