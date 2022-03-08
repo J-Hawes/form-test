@@ -1,7 +1,7 @@
 const fs = require("fs");
 
-const MOVERS = "./server/movers.json";
-const PROPERTY = "./server/property.json";
+const MOVERS = "./server/forms/movers.json";
+const PROPERTY = "./server/forms/property.json";
 
 const getPropertyReport = async (req, res) => {
   fs.readFile(PROPERTY, "utf8", (err, jsonString) => {

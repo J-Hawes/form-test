@@ -4,6 +4,7 @@ import Movers from "./pages/movers";
 import Property from "./pages/property";
 import Thankyou from "./pages/thanks";
 import Form from "./components/Form";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/movers" element={<Movers />} />
         <Route path="property-report" element={<Property />} />
         <Route path="thanks" element={<Thankyou />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

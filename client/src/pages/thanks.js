@@ -1,8 +1,9 @@
 export default function Thankyou() {
   console.log();
   return (
-    <main style={{ padding: "1rem 0" }}>
+    <div className="flex-auto text-center mx-auto font-bold text-2xl mt-10 bg-blue-300">
       <h2>Thank You for your submission!</h2>
+      <p></p>
       <div>
         You submittded the following:
         {/* <ul>
@@ -15,6 +16,6 @@ export default function Thankyou() {
           })}
         </ul> */}
       </div>
-    </main>
+    </div>
   );
 }

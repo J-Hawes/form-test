@@ -8,11 +8,11 @@
 }
 
 .wrapper {
-  padding: 5px 20px;
+  padding: 5px 20px !important;
 }
 
 .wrapper fieldset {
-  margin: 20px 0;
+  margin: 20px 0 !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -86,8 +86,8 @@ function Form({ data }) {
 
   return (
     <FormContext.Provider value={{ handleChange }}>
-      <div className="wrapper">
-        <h1> {page_label}</h1>
+      <div className="max-w-screen-sm mx-auto">
+        <h1 className="text-2xl text-center pt-5"> {page_label}</h1>
         {submitting && (
           <div>
             You are submitting the following:
@@ -102,13 +102,21 @@ function Form({ data }) {
             </ul>
           </div>
         )}
-        <form onSubmit={handleSubmit}>
+        <form
+          className="text-center bg-slate-200 p-3 rounded-lg "
+          onSubmit={handleSubmit}
+        >
           <fieldset>
             {fields
               ? fields.map((field, i) => <Element key={i} field={field} />)
               : null}
           </fieldset>
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            className="p-3  bg-blue-300 text-center font-bold text-white rounded shadow "
+          >
+            Submit
+          </button>
         </form>
       </div>
     </FormContext.Provider>
