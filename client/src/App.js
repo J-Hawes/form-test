@@ -1,112 +1,20 @@
-import React, { useState, useReducer, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Element from "./components/Element";
-import testForm from "./testForm.json";
-import { FormContext } from "./FormContext";
-import { useNavigate } from "react-router-dom";
+import Movers from "./pages/movers";
+import Property from "./pages/property";
+import Thankyou from "./pages/thanks";
+import Form from "./components/Form";
 
-const formReducer = (state, event) => {
-  if (event.reset) {
-    return {
-      name: "",
-      email: "",
-      "phone-type": "",
-      number: "",
-      subscribe: false,
-    };
-  }
-  return {
-    ...state,
-    [event.name]: event.value,
-  };
-};
-
-function App({ data }) {
-  const [formData, setFormData] = useReducer(formReducer, {});
-  const [submitting, setSubmitting] = useState(false);
-  const [elements, setElement] = useState(null);
-  // const [data, setData] = useState(null);
-
-  let navigate = useNavigate();
-
-  // useEffect(() => {
-  //   fetch("/movers")
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data));
-  // }, []);
-
-  data && console.log(data.data);
-
-  useEffect(() => {
-    setElement((data && data.data) || testForm[0]);
-  }, []);
-
-  const { fields, page_label } = elements ?? {};
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setSubmitting(true);
-    console.log(formData);
-
-    setTimeout(() => {
-      setFormData({
-        reset: true,
-      });
-      navigate("/thanks");
-    }, 3000);
-  };
-
-  const handleChange = (id, event) => {
-    const newElements = { ...elements };
-    const isCheckbox = event.target.type === "checkbox";
-    newElements.fields.forEach((field) => {
-      const { field_type, field_id } = field;
-      if (id === field_id) {
-        switch (field_type) {
-          case "checkbox":
-            field["field_value"] = event.target.checked;
-            break;
-          default:
-            field["field_value"] = event.target.value;
-            break;
-        }
-      }
-      setElement(newElements);
-      setFormData({
-        name: event.target.name,
-        value: isCheckbox ? event.target.checked : event.target.value,
-      });
-    });
-  };
-
+function App() {
   return (
-    <FormContext.Provider value={{ handleChange }}>
-      <div className="wrapper">
-        <h1> {page_label}</h1>
-        {submitting && (
-          <div>
-            You are submitting the following:
-            <ul>
-              {Object.entries(formData).map(([name, value]) => {
-                return (
-                  <li key={name}>
-                    <strong>{name}</strong>: {value.toString()}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
-        <form onSubmit={handleSubmit}>
-          <fieldset>
-            {fields
-              ? fields.map((field, i) => <Element key={i} field={field} />)
-              : null}
-          </fieldset>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </FormContext.Provider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Form />} />
+        <Route path="/movers" element={<Movers />} />
+        <Route path="property-report" element={<Property />} />
+        <Route path="thanks" element={<Thankyou />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

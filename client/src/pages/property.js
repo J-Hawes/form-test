@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import App from "./App";
+import Form from "../components/Form";
 
 export default function Property() {
   const [data, setData] = useState(null);
@@ -15,7 +15,7 @@ export default function Property() {
   return (
     data && (
       <main style={{ padding: "1rem 0" }}>
-        <App data={data} />
+        <Form data={data} />
       </main>
     )
   );
