@@ -21,24 +21,24 @@ const formReducer = (state, event) => {
   };
 };
 
-function App() {
+function App({ data }) {
   const [formData, setFormData] = useReducer(formReducer, {});
   const [submitting, setSubmitting] = useState(false);
   const [elements, setElement] = useState(null);
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
   let navigate = useNavigate();
 
-  useEffect(() => {
-    fetch("/movers")
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("/movers")
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data));
+  // }, []);
 
   data && console.log(data.data);
 
   useEffect(() => {
-    setElement(testForm[0]);
+    setElement((data && data.data) || testForm[0]);
   }, []);
 
   const { fields, page_label } = elements ?? {};
@@ -49,7 +49,6 @@ function App() {
     console.log(formData);
 
     setTimeout(() => {
-      //window.location.href = "thanks.html";
       setFormData({
         reset: true,
       });
@@ -81,7 +80,7 @@ function App() {
   };
 
   return (
-    <FormContext.Provider value={{ handleChange, handleSubmit }}>
+    <FormContext.Provider value={{ handleChange }}>
       <div className="wrapper">
         <h1> {page_label}</h1>
         {submitting && (

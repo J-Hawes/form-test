@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import App from "./App";
 
 export default function Movers() {
   const [data, setData] = useState(null);
@@ -12,8 +13,10 @@ export default function Movers() {
   data && console.log(data.data);
 
   return (
-    <main style={{ padding: "1rem 0" }}>
-      <h2>Movers</h2>
-    </main>
+    data && (
+      <main style={{ padding: "1rem 0" }}>
+        <App data={data} />
+      </main>
+    )
   );
 }
