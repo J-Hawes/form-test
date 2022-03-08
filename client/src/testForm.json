@@ -8,7 +8,7 @@
         "field_value": "",
         "field_mandatory": "yes",
         "field_placeholder": "Enter your name",
-        "field_type": "text"
+        "field_type": "textarea"
       },
       {
         "field_id": "email",

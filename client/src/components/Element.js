@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./Input";
+import Textarea from "./Textarea";
 import Select from "./Select";
 import Checkbox from "./Checkbox";
 
@@ -17,6 +18,15 @@ const Element = ({
     case "text":
       return (
         <Input
+          field_id={field_id}
+          field_label={field_label}
+          field_placeholder={field_placeholder}
+          field_value={field_value}
+        />
+      );
+    case "textarea":
+      return (
+        <Textarea
           field_id={field_id}
           field_label={field_label}
           field_placeholder={field_placeholder}
