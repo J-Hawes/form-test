@@ -39,7 +39,7 @@ function Form({ data }) {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
-  data && console.log(data.data);
+  // data && console.log(data.data);
 
   useEffect(() => {
     setElement((data && data.data) || testForm[0]);
@@ -51,13 +51,12 @@ function Form({ data }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitting(true);
-    console.log(formData);
 
     setTimeout(() => {
       setFormData({
         reset: true,
       });
-      navigate("/thanks");
+      navigate("/thanks", { state: { formData } });
     }, 3000);
   };
 
@@ -86,22 +85,8 @@ function Form({ data }) {
 
   return (
     <FormContext.Provider value={{ handleChange }}>
-      <div className="max-w-screen-sm mx-auto">
+      <div className="w-80   mx-auto">
         <h1 className="text-2xl text-center pt-5"> {page_label}</h1>
-        {submitting && (
-          <div>
-            You are submitting the following:
-            <ul>
-              {Object.entries(formData).map(([name, value]) => {
-                return (
-                  <li key={name}>
-                    <strong>{name}</strong>: {value.toString()}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
         <form
           className="text-center bg-slate-200 p-3 rounded-lg "
           onSubmit={handleSubmit}
@@ -118,6 +103,20 @@ function Form({ data }) {
             Submit
           </button>
         </form>
+        {submitting && (
+          <div>
+            You are submitting the following: <p></p>
+            <ul>
+              {Object.entries(formData).map(([name, value]) => {
+                return (
+                  <li key={name}>
+                    <strong>{name}</strong>: {value.toString()}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </FormContext.Provider>
   );

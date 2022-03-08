@@ -10,8 +10,6 @@ export default function Property() {
       .then((data) => setData(data));
   }, []);
 
-  data && console.log(data.data);
-
   return (
     data && (
       <main style={{ padding: "1rem 0" }}>
