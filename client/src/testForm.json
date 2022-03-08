@@ -8,6 +8,14 @@
         "field_value": "",
         "field_mandatory": "yes",
         "field_placeholder": "Enter your name",
+        "field_type": "text"
+      },
+      {
+        "field_id": "address",
+        "field_label": "Address",
+        "field_value": "",
+        "field_mandatory": "yes",
+        "field_placeholder": "Enter your address",
         "field_type": "textarea"
       },
       {

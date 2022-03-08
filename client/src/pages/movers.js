@@ -4,17 +4,19 @@ import Form from "../components/Form";
 export default function Movers() {
   const [data, setData] = useState(null);
 
+  // fetching the movers form from the sever
   useEffect(() => {
     fetch("/movers")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
 
+  // passing data to Form component
   return (
     data && (
-      <main style={{ padding: "1rem 0" }}>
+      <div>
         <Form data={data} />
-      </main>
+      </div>
     )
   );
 }

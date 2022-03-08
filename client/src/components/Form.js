@@ -10,7 +10,7 @@ const formReducer = (state, event) => {
     return {
       name: "",
       email: "",
-      "phone-type": "",
+      "phone type": "",
       number: "",
       subscribe: false,
     };
@@ -85,20 +85,20 @@ function Form({ data }) {
 
   return (
     <FormContext.Provider value={{ handleChange }}>
-      <div className="w-80   mx-auto">
+      <div className="w-80 mx-auto">
         <h1 className="text-2xl text-center pt-5"> {page_label}</h1>
         <form
-          className="text-center bg-slate-200 p-3 rounded-lg "
+          className="text-center bg-blue-100 p-3 rounded-lg"
           onSubmit={handleSubmit}
         >
-          <fieldset>
+          <fieldset className="text-left">
             {fields
               ? fields.map((field, i) => <Element key={i} field={field} />)
               : null}
           </fieldset>
           <button
             type="submit"
-            className="p-3  bg-blue-300 text-center font-bold text-white rounded shadow "
+            className="p-3 bg-blue-300 text-center font-bold text-slate-50 rounded-md shadow "
           >
             Submit
           </button>

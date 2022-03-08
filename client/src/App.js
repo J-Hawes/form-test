@@ -4,7 +4,7 @@ import Movers from "./pages/movers";
 import Property from "./pages/property";
 import Thankyou from "./pages/thanks";
 import Form from "./components/Form";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/notFound";
 
 function App() {
   return (
