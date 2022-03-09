@@ -12,14 +12,14 @@ app.use(express.json());
 // reference to api controllers
 const api = require("./api");
 
-// define http functions, routing paths and call api functions
+// define http requests, routing paths and call api functions
 app.get("/property-report", api.getPropertyReport);
 
 app.get("/movers", api.getMovers);
 
 app.post("/submit", (req, res) => {
-  api.writeSubmission(req.body.data);
-  res.json({ message: "Success" });
+  api.postSubmission(req.body.data);
+  res.json({ message: "Submitted successfully" });
 });
 
 // Run Server

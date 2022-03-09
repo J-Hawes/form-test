@@ -23,7 +23,6 @@ const formReducer = (state, event) => {
 
 function Form({ data }) {
   const [formData, setFormData] = useReducer(formReducer, {});
-  const [submitting, setSubmitting] = useState(false);
   const [elements, setElement] = useState(null);
   // const [data, setData] = useState(null);
   const location = useLocation();
@@ -32,14 +31,12 @@ function Form({ data }) {
 
   console.log(location.pathname);
 
-  // useEffect(() => {
-  //   fetch(location.pathname)
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
-  // data && console.log(data.data);
+  //   useEffect(() => {
+  //     fetch(`${location.pathname}`)
+  //       .then((res) => res.json())
+  //       .then((data) => setData(data));
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, []);
 
   useEffect(() => {
     setElement((data && data.data) || testForm[0]);
@@ -48,16 +45,17 @@ function Form({ data }) {
 
   const { fields, page_label } = elements ?? {};
 
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ formData }),
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitting(true);
-
-    setTimeout(() => {
-      setFormData({
-        reset: true,
-      });
-      navigate("/thanks", { state: { formData } });
-    }, 3000);
+    navigate("/thanks", { state: { formData } });
   };
 
   const handleChange = (id, event) => {
@@ -103,20 +101,6 @@ function Form({ data }) {
             Submit
           </button>
         </form>
-        {submitting && (
-          <div>
-            You are submitting the following: <p></p>
-            <ul>
-              {Object.entries(formData).map(([name, value]) => {
-                return (
-                  <li key={name}>
-                    <strong>{name}</strong>: {value.toString()}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        )}
       </div>
     </FormContext.Provider>
   );

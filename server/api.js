@@ -1,16 +1,22 @@
 const fs = require("fs");
 
-const MOVERS = "./server/forms/movers.json";
-const PROPERTY = "./server/forms/property.json";
-const SUBMISSION = "./submission.json";
+const moverFILE = "./server/forms/movers.json";
+const propertyFILE = "./server/forms/property.json";
+const submissionFILE = "./server/submission.json";
 
-const postSubmission = async (submission) => {
-  await fs.writeFile(SUBMISSION, JSON.stringify(submission));
+function postSubmission(submission) {
+  fs.writeFile(submissionFILE, JSON.stringify(submission, null, 2), (err) => {
+    if (err) throw err;
+  });
   return;
-};
+}
 
 const getPropertyReport = async (req, res) => {
-  fs.readFile(PROPERTY, "utf8", (err, jsonString) => {
+  fs.readFile(propertyFILE, "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("Error reading file from disk:", err);
+      return null;
+    }
     try {
       const propertyFrom = JSON.parse(jsonString);
       res.status(200).json({
@@ -27,7 +33,7 @@ const getPropertyReport = async (req, res) => {
 };
 
 const getMovers = async (req, res) => {
-  fs.readFile(MOVERS, "utf8", (err, jsonString) => {
+  fs.readFile(moverFILE, "utf8", (err, jsonString) => {
     if (err) {
       console.log("Error reading file from disk:", err);
       return null;
