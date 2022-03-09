@@ -50,12 +50,14 @@ function Form({ data }) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ formData }),
+    body: JSON.stringify({ data: formData }),
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/thanks", { state: { formData } });
+    fetch("/submit", options).then(
+      navigate("/thanks", { state: { formData } })
+    );
   };
 
   const handleChange = (id, event) => {
