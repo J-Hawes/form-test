@@ -4,6 +4,8 @@ import Textarea from "./Textarea";
 import Select from "./Select";
 import Checkbox from "./Checkbox";
 
+// Building the form elements based on the JSON template from the server
+
 const Element = ({
   field: {
     field_type,

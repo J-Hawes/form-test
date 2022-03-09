@@ -5,6 +5,8 @@ import testForm from "../testForm.json";
 import { FormContext } from "../FormContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
+// Handling the state taken from the onChange event, built in reset option
+
 const formReducer = (state, event) => {
   if (event.reset) {
     return {
@@ -29,8 +31,9 @@ function Form({ data }) {
 
   let navigate = useNavigate();
 
+  // testing a way to dynamically grab the path location and fetch matching forms, rather than use 2 seperate components
   console.log(location.pathname);
-
+  // further testing the above
   //   useEffect(() => {
   //     fetch(`${location.pathname}`)
   //       .then((res) => res.json())
@@ -38,13 +41,14 @@ function Form({ data }) {
   //     // eslint-disable-next-line react-hooks/exhaustive-deps
   //   }, []);
 
+  // passes the form template from the server to the elements, or loads the client side test form if null
   useEffect(() => {
     setElement((data && data.data) || testForm[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { fields, page_label } = elements ?? {};
-
+  // define http post method options and data
   const options = {
     method: "POST",
     headers: {
@@ -52,14 +56,16 @@ function Form({ data }) {
     },
     body: JSON.stringify({ data: formData }),
   };
-
+  // Posts the form response to the server
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(elements.page_label);
+    console.log({ formData });
     fetch("/submit", options).then(
       navigate("/thanks", { state: { formData } })
     );
   };
-
+  // builds the form respoonse based on user changes to the input fields
   const handleChange = (id, event) => {
     const newElements = { ...elements };
     const isCheckbox = event.target.type === "checkbox";
@@ -91,6 +97,7 @@ function Form({ data }) {
           className="text-center bg-blue-100 p-3 rounded-lg"
           onSubmit={handleSubmit}
         >
+          {/* Maps over every field in the JSON template and builds a form element for each */}
           <fieldset className="text-left">
             {fields
               ? fields.map((field, i) => <Element key={i} field={field} />)

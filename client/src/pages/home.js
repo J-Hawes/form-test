@@ -1,3 +1,5 @@
+// Landing page, basic navigation options directing to either route
+
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {

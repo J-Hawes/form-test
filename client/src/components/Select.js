@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { FormContext } from "../FormContext";
 
+// Creating a select component to handle dynamic fields
+
 const Select = ({ field_id, field_label, field_value, field_options }) => {
   const { handleChange } = useContext(FormContext);
   return (

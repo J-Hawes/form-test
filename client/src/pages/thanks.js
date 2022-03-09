@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 export default function Thankyou() {
   const navigate = useNavigate();
   const { state } = useLocation();
-
   const formData = state;
+
   return (
     <div className="flex-auto text-center mx-auto">
       <h2 className="font-bold text-2xl mt-10 pt-5 bg-blue-300">
@@ -16,6 +16,7 @@ export default function Thankyou() {
         <p></p>
         <div className="font-normal text-xl mt-5 bg-white">
           <ul>
+            {/* Map over the submitted form data and display to screen */}
             {Object.entries(formData.formData).map(([name, value]) => {
               return (
                 <li key={name}>

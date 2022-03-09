@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { FormContext } from "../FormContext";
 
+// Creating a text input component to handle dynamic fields
+
 const Input = ({ field_id, field_label, field_placeholder, field_value }) => {
   const { handleChange } = useContext(FormContext);
   return (

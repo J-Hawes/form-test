@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { FormContext } from "../FormContext";
 
+// Creating a textarea component to handle dynamic fields
+
 const Input = ({
   field_type,
   field_id,

@@ -1,16 +1,22 @@
 const fs = require("fs");
 
+// Template files
 const moverFILE = "./server/forms/movers.json";
 const propertyFILE = "./server/forms/property.json";
-const submissionFILE = "./server/submission.json";
 
+// Write submission to a new JSON file appended with date
 function postSubmission(submission) {
-  fs.writeFile(submissionFILE, JSON.stringify(submission, null, 2), (err) => {
-    if (err) throw err;
-  });
+  fs.writeFile(
+    `./server/submission${+Date.now()}.json`,
+    JSON.stringify(submission, null, 2),
+    (err) => {
+      if (err) throw err;
+    }
+  );
   return;
 }
 
+// Read property-report JSON form template
 const getPropertyReport = async (req, res) => {
   fs.readFile(propertyFILE, "utf8", (err, jsonString) => {
     if (err) {
@@ -32,6 +38,7 @@ const getPropertyReport = async (req, res) => {
   });
 };
 
+// Read movers JSON form template
 const getMovers = async (req, res) => {
   fs.readFile(moverFILE, "utf8", (err, jsonString) => {
     if (err) {

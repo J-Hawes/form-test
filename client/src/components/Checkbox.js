@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { FormContext } from "../FormContext";
 
+// Creating a checkbox component to handle dynamic fields
+
 const Checkbox = ({ field_id, field_label, field_value }) => {
   const { handleChange } = useContext(FormContext);
   return (
